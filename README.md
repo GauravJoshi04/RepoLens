@@ -12,4 +12,4 @@ An AI-powered developer tool that helps understand public GitHub repositories th
 
 ## Status
 
-🚧 Under Development
+ Under Development !!
