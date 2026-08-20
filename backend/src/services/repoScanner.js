@@ -1,12 +1,10 @@
-const fs = require("fs").promises;
+import fs from "fs/promises";
 import {cloneRepository} from "./cloneService.js" ;
 
-const { repoName, repoPath } = await cloneRepository(repoUrl);
 
-async function scanRepository(repoPath) {
+export async function scanRepository(repoPath) {
     const items= await fs.readdir(repoPath);
 
-    console.log(repoPath) ;
+    console.log(items);
 }
 
-module.exports = scanRepository;
