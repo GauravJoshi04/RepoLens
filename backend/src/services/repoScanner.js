@@ -8,6 +8,20 @@ const ignoredDirectories = [
     "build"
 ];
 
+const codeExtensions = [
+    ".js",
+    ".jsx",
+    ".ts",
+    ".tsx",
+    ".py",
+    ".java",
+    ".cpp",
+    ".c",
+    ".h",
+    ".html",
+    ".css"
+];
+
 export async function scanRepository(repoPath) {
     
     const items= await fs.readdir(repoPath);
@@ -18,7 +32,13 @@ export async function scanRepository(repoPath) {
 
        if(stats.isFile()) {
         const extension = path.extname(item); // extension of file the last . of item
-        console.log(item, extension);
+        // if this extension matches in code ext. list this is a code file
+        if (codeExtensions.includes(extension)) {
+            console.log(`${item} -> Code file`);
+        }else{
+             console.log(item, extension);
+        }
+        
        }
        if(stats.isDirectory()){
         // if this directory is in ignored array we don't recurse into it
