@@ -1,5 +1,5 @@
 import fs from "fs/promises";
-import path from "path";
+import path, { relative } from "path";
 
 const ignoredDirectories = [
     ".git",
@@ -22,22 +22,32 @@ const codeExtensions = [
     ".css"
 ];
 
+
 export async function scanRepository(repoPath) {
-    
+    const files = [] ;
+
     const items= await fs.readdir(repoPath);
     for(const item of items){
         
        const fullPath = path.join(repoPath ,item) ;
        const stats = await fs.stat(fullPath) ;
-
+       const relativePath = path.relative() ;
+       
        if(stats.isFile()) {
         const extension = path.extname(item); // extension of file the last . of item
         // if this extension matches in code ext. list this is a code file
         if (codeExtensions.includes(extension)) {
+            files.push({
+            path: fullPath,
+            relativePath: relativePath ,
+            type:"code"
+
+        })
             console.log(`${item} -> Code file`);
         }else{
              console.log(item, extension);
         }
+
         
        }
        if(stats.isDirectory()){
@@ -47,11 +57,15 @@ export async function scanRepository(repoPath) {
         }
         
         console.log(`${item} is Directory`);
-        await scanRepository(fullPath);
+
+        const childFiles = await scanRepository(fullPath); // recurse into dir. and push them into too
+        files.push(...childFiles);
        }
 
     }
 
-    console.log(items); // print entire array of dir. and files 
+    //console.log(items); // print entire array of dir. and files 
+    //console.log(files)  ;
+    return files ;
 }
 
