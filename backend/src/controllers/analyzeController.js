@@ -14,7 +14,7 @@ export const analyzeRepository = async (req, res) => {
 
     const result = await cloneRepository(repoUrl);
 
-    const files = await scanRepository(result.repoPath);
+    const files = await scanRepository(result.repoPath , result.repoPath);
     console.log("FINAL FILES:", files);
 
     return res.status(200).json({
