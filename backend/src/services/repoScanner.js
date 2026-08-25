@@ -38,10 +38,14 @@ export async function scanRepository(repoPath , rootPath) {
         const extension = path.extname(item); // extension of file the last . of item
         // if this extension matches in code ext. list this is a code file
         if (codeExtensions.includes(extension)) {
+
+            const content = await fs.readFile(fullPath ,'utf-8') ;
+            
             files.push({
             path: fullPath,
             relativePath: relativePath ,
-            type:"code"
+            type:"code",
+            content: content
 
         })
             console.log(`${item} -> Code file`);
@@ -68,5 +72,6 @@ export async function scanRepository(repoPath , rootPath) {
     //console.log(items); // print entire array of dir. and files 
     //console.log(files)  ;
     return files ;
+    
 }
 
