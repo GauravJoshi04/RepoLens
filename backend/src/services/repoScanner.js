@@ -48,9 +48,9 @@ export async function scanRepository(repoPath , rootPath) {
             content: content
 
         })
-            console.log(`${item} -> Code file`);
+            //console.log(`${item} -> Code file`);
         }else{
-             console.log(item, extension);
+             //console.log(item, extension);
         }
 
         
@@ -61,7 +61,7 @@ export async function scanRepository(repoPath , rootPath) {
           continue ;
         }
         
-        console.log(`${item} is Directory`);
+        //cconsole.log(`${item} is Directory`);
 
         const childFiles = await scanRepository(fullPath ,rootPath); // recurse into dir. and push them into too
         files.push(...childFiles);

@@ -1,0 +1,1 @@
+// will embedd 1 chunk per time and use Gemini embedding model
