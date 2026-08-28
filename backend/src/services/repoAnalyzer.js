@@ -5,6 +5,7 @@
 import { scanRepository } from "./repoScanner.js";
 
 import {chunkCodeFile} from "./codeChunker.js";
+import { generateEmbedding } from "./embeddingService.js";
 
 export async function repoAnalyzer(repoPath) {
     const files = await scanRepository(repoPath , repoPath) ;
@@ -16,8 +17,22 @@ export async function repoAnalyzer(repoPath) {
 
         allChunks.push(...chunks) ;
     }
-    console.log("Total Chunks are:" , allChunks.length ) ;
-    console.log(allChunks[0])
+
+
+    // pushing all these chunks to embedding service
+    
+    const texts = allChunks.map(chunk => chunk.content) ;
+    const embeddings = await generateEmbedding(texts) ;
+
+    for(let i = 0 ; i< allChunks.length ; i++){
+        allChunks[i].embedding = embeddings[i].values ;
+    }
+    //  embedding contains value property which has our [] dimensions
+    
+    console.log("Total chunks:", allChunks.length);
+    console.log("Total embeddings:", embeddings.length);
+    console.log("First vector length:", allChunks[0].embedding.length);
+
     return {
         repoPath,
         files,

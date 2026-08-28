@@ -1,5 +1,5 @@
 import { cloneRepository } from "../services/cloneService.js";
-import { repoAnalyzer } from "../services/repositoryAnalyzer.js";
+import { repoAnalyzer } from "../services/repoAnalyzer.js";
 
 export const analyzeRepository = async (req, res) => {
 
@@ -19,6 +19,8 @@ export const analyzeRepository = async (req, res) => {
     const repository = await repoAnalyzer(result.repoPath) ;
     //console.log("Repository:", repository);
     //console.log("FINAL FILES:", repository.files);
+
+    
 
     return res.status(200).json({
         success: true,
