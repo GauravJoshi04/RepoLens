@@ -5,7 +5,7 @@
 import { scanRepository } from "./repoScanner.js";
 
 import {chunkCodeFile} from "./codeChunker.js";
-import { generateEmbedding } from "./embeddingService.js";
+import { generateEmbeddings } from "./embeddingService.js";
 
 export async function repoAnalyzer(repoPath) {
     const files = await scanRepository(repoPath , repoPath) ;
@@ -22,7 +22,13 @@ export async function repoAnalyzer(repoPath) {
     // pushing all these chunks to embedding service
     
     const texts = allChunks.map(chunk => chunk.content) ;
-    const embeddings = await generateEmbedding(texts) ;
+    const embeddings = await generateEmbeddings(texts) ;
+    // safety check if vectors length is equal to Embeddings length
+    if (allChunks.length !== embeddings.length) {
+    throw new Error(
+        `Chunk/embedding mismatch: ${allChunks.length} chunks, ${embeddings.length} embeddings`
+    );
+   }
 
     for(let i = 0 ; i< allChunks.length ; i++){
         allChunks[i].embedding = embeddings[i].values ;

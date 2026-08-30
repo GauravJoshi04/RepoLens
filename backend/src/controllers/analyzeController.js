@@ -23,8 +23,11 @@ export const analyzeRepository = async (req, res) => {
     
 
     return res.status(200).json({
-        success: true,
-        repoUrl,
-        result
+    success: true,
+    repoUrl,
+    result,
+    totalFiles: repository.files.length,
+    totalChunks: repository.chunks.length,
+    firstChunk: repository.chunks[0]
     });
 };
