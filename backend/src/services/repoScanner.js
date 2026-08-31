@@ -33,7 +33,7 @@ export async function scanRepository(repoPath , rootPath) {
        const fullPath = path.join(repoPath ,item) ;
        const stats = await fs.stat(fullPath) ;
        const relativePath = path.relative(rootPath , fullPath) ;
-       
+       //relativePath = file.relativePath.replaceAll("\\", "/") ; // normalize it since for windows its \\ but / is 
        if(stats.isFile()) {
         const extension = path.extname(item); // extension of file the last . of item
         // if this extension matches in code ext. list this is a code file
