@@ -16,7 +16,10 @@ export const analyzeRepository = async (req, res) => {
 
     //const files = await scanRepository(result.repoPath , result.repoPath);
     
-    const repository = await repoAnalyzer(result.repoPath) ;
+    const repository = await repoAnalyzer(
+    result.repoPath,
+    result.repoName
+);
     //console.log("Repository:", repository);
     //console.log("FINAL FILES:", repository.files);
 

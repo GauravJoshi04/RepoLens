@@ -8,7 +8,7 @@ import { scanRepository } from "./repoScanner.js";
 import {chunkCodeFile} from "./codeChunker.js";
 import { generateEmbeddings } from "./embeddingService.js";
 
-export async function repoAnalyzer(repoPath) {
+    export async function repoAnalyzer(repoPath, repoName){
     const files = await scanRepository(repoPath , repoPath) ;
     
     const allChunks = [] ;
