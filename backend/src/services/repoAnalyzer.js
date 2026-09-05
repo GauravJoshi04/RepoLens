@@ -7,7 +7,7 @@ import { scanRepository } from "./repoScanner.js";
 
 import {chunkCodeFile} from "./codeChunker.js";
 import { generateEmbeddings } from "./embeddingService.js";
-
+import { storeVectors } from "./pineconeService.js";
     export async function repoAnalyzer(repoPath, repoName){
     const files = await scanRepository(repoPath , repoPath) ;
     
@@ -34,6 +34,8 @@ import { generateEmbeddings } from "./embeddingService.js";
     for(let i = 0 ; i< allChunks.length ; i++){
         allChunks[i].embedding = embeddings[i].values ;
     }
+    // call pinecone function to store these emebeddings
+    await storeVectors(allChunks, repoName);
     //  embedding contains value property which has our [] dimensions
     
     console.log("Total chunks:", allChunks.length);

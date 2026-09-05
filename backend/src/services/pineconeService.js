@@ -9,7 +9,7 @@ const pc = new Pinecone({
 // index is our repolens 
 const index = pc.index("repolens");
 
-export async function storeVectors(chunks) {
+export async function storeVectors(chunks, repoName){
 
     const vectors = chunks.map((chunk, index) => ({
         id: `chunk-${index}`,
@@ -22,8 +22,10 @@ export async function storeVectors(chunks) {
             endLine: chunk.endLine
         }
     }));
-
-    await index.upsert(vectors);
-
+    console.log("Vectors created:", vectors.length);
+    await index.namespace(repoName).upsert({
+    records: vectors
+    });
     console.log(`Stored ${vectors.length} vectors in Pinecone`);
+
 }
