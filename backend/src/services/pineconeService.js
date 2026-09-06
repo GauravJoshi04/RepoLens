@@ -7,7 +7,7 @@ const pc = new Pinecone({
 });
 
 // index is our repolens 
-const index = pc.index("repolens");
+const index = pc.index({name : "repolens"});
 
 export async function storeVectors(chunks, repoName){
 
