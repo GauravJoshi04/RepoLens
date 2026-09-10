@@ -69,6 +69,6 @@ export async function generateEmbedding(text) {
     }
 
     const data = await response.json();
-    console.log("Embedding response:", data);
+    //console.log("Embedding response:", data);
     return data.embedding.values;
 }
