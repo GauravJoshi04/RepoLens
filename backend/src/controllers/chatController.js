@@ -28,10 +28,16 @@ export async function chatController(req, res) {
             question,
             chunks
         );
+        // also sources
+        const sources = chunks.map(chunk => ({
+            file: chunk.metadata?.relativePath || "Unknown" ,
+            score: chunk.score
+        }))
 
         // 3. Send response
         return res.status(200).json({
-            answer
+            answer,
+            sources
         });
 
     } catch (error) {
