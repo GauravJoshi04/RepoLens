@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./App.css";
+import ReactMarkdown from "react-markdown";
 
 function App() {
     const [repoUrl, setRepoUrl] = useState("");
@@ -168,7 +169,7 @@ function App() {
 
                         {repoReady && (
                             <div className="repo-ready">
-                                ✓ Repository ready
+                                Repository ready !
                             </div>
                         )}
 
@@ -259,7 +260,7 @@ function App() {
                             <div className="answer-card">
 
                                 <div className="answer">
-                                    {answer}
+                                    <ReactMarkdown>{answer}</ReactMarkdown>
                                 </div>
 
                             </div>
