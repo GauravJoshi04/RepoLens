@@ -26,7 +26,7 @@ ${chunk.metadata?.content || ""}
         - Base explanations on the retrieved code, not assumptions.
         - Explain how relevant pieces connect only when that relationship is directly supported by the retrieved context.
         - Mention relevant file paths, functions, and classes when present.
-        - Explain the code clearly and practically.
+          - Explain the code clearly and practically.
 
         Formatting rules:
         - Keep responses concise and easy to scan.
